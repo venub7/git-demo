@@ -1,0 +1,111 @@
+Lambda:
+
+1. IAM: policy & ROLE
+----------------------
+Polocy Name: serverless_app_policy
+file:lambdapolicy
+Role Name: serverless_app_role
+
+2. S3:
+----------
+webapphostingproject
+
+3. SNS:
+------------
+new-post
+
+4. Dynomodb
+--------------
+posts
+id
+
+Lambdafunction1:
+----------------
+Function Name: NewPosts 
+Runtime language:  python 3.6      
+IAM Role:   Select existing role
+file--Code:-----------------------------newposts
+ENV Variable: DBNAME
+ENV Variable: SNSARN
+Description: ------> This function creates posts in dynamoDB
+
+Configure test event:
+EventName:
+HelloJoanna
+
+Code:sample.josan
+
+{
+  "voice": "Joanna",
+  
+"text": "Hello TB Tech!"
+}
+
+lambda2:
+--------------
+Name: ConvertToAudio
+Python 3.6
+choose exe policy
+SNS-- select your sns topic -- save
+Lambda function --> convertoaudio
+
+DB-NAME
+BUCKET NAME
+
+DESCRIPTION : This lambda function converts my text to audio file and save them into s3
+timeout:5
+
+Function3:
+------------
+Name: GetPost  -- py2.7 -- EXE ROLE
+
+code: getpost.py
+DBNAME--
+
+DISCRIPTION: This gets all posts from our DynmoDB table
+
+Test:
+
+Name:  TestEvent
+{
+    "postId": "*"
+}
+
+API GATEWAY under NETWORKING:
+=============================
+CREATE API
+NAME: PostReaderAPI
+DESC: Post Reader API
+
+CREATE METHOD 
+:
+GET
+POST
+ENABLE CROS
+
+GET --> METHODREQUEST --> url Query --> ADD query string --> (postId)
+GET--> Integration Request--> body maping template --> recamended
+        (application/json) ritemark -- past code from --> mappings.jason
+
+Go to S3 bucket:
+
+Host your website --> in java code provide your API ARN which is below
+
+change the bucket policy --> with full bucket access -- file bucketpolicypermission
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
